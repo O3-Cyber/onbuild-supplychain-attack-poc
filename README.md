@@ -16,7 +16,7 @@ The POC is split in multiple attacks that abuse this design:
    - The first ONBUILD layer of the parent dockerfile contains instructions that take informed guesses at possible secret values given to the build. It then persists these to /app/secrets and /app/build-args. This is just to demonstrate the capacity, the secrets still stay in the container, but you could easily imagine how this would work with a curl script extracting them
 
 2. Output modification:
-   - Second ONBUILD shows a step where the build container swaps out a dependency in a go.mod file, making the app run a known-vulnerable dependency. Also here, you could imagine much worse scenarios where the app gets injected with a backdoor for example
+   - Second ONBUILD shows a step where the build container swaps out a dependency in a package.json, making the app run a known-vulnerable dependency. Also here, you could imagine much worse scenarios where the app gets injected with a backdoor for example
 
 3. Remote build control:
    - Third shows a script being downloaded and piped into sh, a common install pattern. This is probably the worst one, as the instructions on the remote server can change the behaviour of the script without changing the hash of the base image. This means that even if the url is deemed safe at audit-time, it may later become compromised, at which point the build can be completely remote controlled by the threat actor
