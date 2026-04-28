@@ -8,6 +8,9 @@ ONBUILD allows upstream docker images to specify instructions to be ran by the f
 
 However, ONBUILD is allowed access to the build-process just as if it was regular build instructions. This means that build-secrets, build-arguments, and env-vars are available for extraction, and the build-context is available for both exfiltration and modification.
 
+## Running the POC
+Clone the repo, and run 'sh poc.sh'. This will show some output, showing that processes defined in the parent image read the secrets passed to the child image at build time
+
 ## How the POC works
 
 The POC is split in multiple attacks that abuse this design:
